@@ -79,7 +79,7 @@ class Estoque {
         this.numero = numero
         this.id = criarId()
     }
-
+// oi
     addObserver(func) {
         this.observers.push(func)
     }
