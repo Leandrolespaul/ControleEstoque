@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criacão de Estoque</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<h1 class="cor center">Criar Estoque</h1>
+
+<div class="form-input">
+    <label for="nome">Nome: </label><input id="nome" placeholder="Nome"/>
+</div>
+
+<div class="form-input">
+    <label for="rua">Rua: </label><input placeholder="Rua" id="rua"/>
+</div>
+
+<div class="form-input">
+    <label for="bairro">Bairro: </label><input placeholder="Bairro" id="bairro">
+</div>
+
+<div class="form-input">
+    <label for="numero">Número: </label><input placeholder="Número" id="numero"/>
+</div>
+<button onclick="criarEstoque()" id="btn-criarEstoque">Criar Estoque</button>
+
+<ul id="lista-estoques"></ul>
+
+<label for="select-estoque-remover">Estoque: </label>
+<select id="select-estoque-remover">
+    <option></option>
+</select>
+<button onclick="removerEstoque()">Remover Estoque</button>
+
+<h1 class="cor center">Criação de depósito</h1>
+
+<label for="select">Selecione o Estoque:</label>
+<select id="select">
+    <option></option>
+</select>
+<div class="form-input">
+    <label for="nome-deposito">Nome depósito: </label><input id="nome-deposito"/>
+</div>
+
+<!--<div class="form-input">-->
+<!--    <label for="quantidade-item">Quantidade: </label><input id="quantidade-item"/>-->
+<!--</div>-->
+
+<button id="btn-criar-deposito">Criar depósito nesse Estoque</button>
+
+<!--<button id="btn-criarItem">Criar item</button>-->
+
+<ul id="lista-deposito"></ul>
+
+
+<script src="code.js"></script>
+</body>
+
+</html>
