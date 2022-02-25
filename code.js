@@ -66,8 +66,7 @@ class Deposito {
         })
     }
 }
-
-
+ 
 class Estoque {
     depositos = []
     observers = []
@@ -191,8 +190,10 @@ const resetFormEstoque = () => {
 const renderizarEstoqueLista = () => {
     const listaEstoques = document.getElementById('lista-estoques')
     listaEstoques.innerHTML = ''
+    
     tabelaEstoque.forEach(estoque => {
         const estoqueItemLista = document.createElement('li')
+        estoqueItemLista.setAttribute('id', `estoque_${estoque.id}`)
         estoqueItemLista.appendChild(document.createTextNode(estoque.nome + ' ' + estoque.rua + ' ' +
             estoque.bairro + ' ' + estoque.numero))
         listaEstoques.appendChild(estoqueItemLista)
@@ -239,9 +240,6 @@ const removerEstoque = () => {
     removerEstoquePorId(idEstoqueSelecionado)
 }
 
-
-
-
 const myFunctionDeposito = () => {
     console.log('Esta é minha função')
 
@@ -250,32 +248,33 @@ const myFunctionDeposito = () => {
     const itemEncontradoDropDown = tabelaEstoque.find(est => est.id === itemSelecionado)
     if (itemEncontradoDropDown) {
         console.log(itemEncontradoDropDown.criarDeposito(nomeDeposito.value))
+
     }
     console.log(tabelaEstoque)
+    return itemEncontradoDropDown
 }
-
-
 
 btnCriarDeposito.addEventListener('click', () => {
-    myFunctionDeposito()
-    renderizarDepositoLista()
+   const estoque =  myFunctionDeposito()
+    renderizarDepositoLista(estoque)
 })
 
-const renderizarDepositoLista = () => {
-    const listaDeposito = document.getElementById('lista-deposito')
-    listaDeposito.innerHTML = ''
-    tabelaEstoque.forEach(deposito => {
-        const depositoItemLista = document.createElement('li')
-        depositoItemLista.appendChild(document.createTextNode(deposito.nome + ' ' + deposito.rua + ' ' +
-            deposito.bairro + ' ' + deposito.numero))
-        listaDeposito.appendChild(depositoItemLista)
+const renderizarDepositoLista = (estoque) => {
+    // const listaDeposito = document.getElementById('lista-deposito')
+    // listaDeposito.innerHTML = ''
+    // tabelaEstoque.forEach(deposito => {
+    //     const depositoItemLista = document.createElement('li')
+
+    //     depositoItemLista.appendChild(document.createTextNode(deposito.nome + ' ' + deposito.rua + ' ' +
+    //         deposito.bairro + ' ' + deposito.numero))
+    //     listaDeposito.appendChild(depositoItemLista)
         
-    })
+    // })
+    console.log(document.getElementById(`estoque_${estoque.id}`))
+
 }
 
-
-
-// LEANDRO
+// Leandro dos Santos Cunha
 
 // const criarNovoDeposito = () => {
 //     criarDeposito()
