@@ -257,17 +257,25 @@ btnCriarDeposito.addEventListener('click', () => {
 })
 
 const renderizarDepositoLista = (estoque) => {
-    const listaEstoques = document.getElementById('lista-estoques')
-    listaEstoques.innerHTML = ''
-    tabelaEstoque.forEach(estoque => {
-        const estoqueItemLista = document.createElement('li')
-        estoqueItemLista.appendChild(document.createTextNode(estoque.nome + ' ' + estoque.rua + ' ' +
-            estoque.bairro + ' ' + estoque.numero))
-        listaEstoques.appendChild(estoqueItemLista)
+    const tagEstoque = document.getElementById(`estoque_${estoque.id}`)
+    const tagDepositoLista = document.createElement('ul')
+    tagEstoque.appendChild(tagDepositoLista)
+    estoque.depositos.forEach(deposito => {
+        const depositoItemTag = document.createElement('li')
+        depositoItemTag.appendChild(document.createTextNode(deposito.nome))
+        tagDepositoLista.appendChild(depositoItemTag)
     })
+    // const listaEstoques = document.getElementById('lista-estoques')
+    // listaEstoques.innerHTML = ''
+    // tabelaEstoque.forEach(estoque => {
+    //     const estoqueItemLista = document.createElement('li')
+    //     estoqueItemLista.appendChild(document.createTextNode(estoque.nome + ' ' + estoque.rua + ' ' +
+    //         estoque.bairro + ' ' + estoque.numero))
+    //     listaEstoques.appendChild(estoqueItemLista)
+    // })
 
 }
-
+// Philipe
 // Leandro dos Santos Cunha
 
 // const criarNovoDeposito = () => {
