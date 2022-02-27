@@ -240,8 +240,6 @@ const removerEstoque = () => {
 }
 
 const myFunctionDeposito = () => {
-    console.log('Esta é minha função')
-
     const select = document.getElementById('select')
     const itemSelecionado = Number(select.value)
     const itemEncontradoDropDown = tabelaEstoque.find(est => est.id === itemSelecionado)
@@ -265,34 +263,7 @@ const renderizarDepositoLista = (estoque) => {
         depositoItemTag.appendChild(document.createTextNode(deposito.nome))
         tagDepositoLista.appendChild(depositoItemTag)
     })
-    // const listaEstoques = document.getElementById('lista-estoques')
-    // listaEstoques.innerHTML = ''
-    // tabelaEstoque.forEach(estoque => {
-    //     const estoqueItemLista = document.createElement('li')
-    //     estoqueItemLista.appendChild(document.createTextNode(estoque.nome + ' ' + estoque.rua + ' ' +
-    //         estoque.bairro + ' ' + estoque.numero))
-    //     listaEstoques.appendChild(estoqueItemLista)
-    // })
-
 }
-// Philipe
-// Leandro dos Santos Cunha
-
-// const criarNovoDeposito = () => {
-//     criarDeposito()
-//     resetFormDeposito()
-// }
-
-// const renderizarDepositoLista = () => {
-//     const listaDeposito = document.getElementById('lista-deposito')
-//     listaDeposito.innerHTML = ''
-//     tabelaDeposito.forEach(deposito => {
-//         const depositoLista = document.createElement('li')
-//         depositoLista.appendChild(document.createTextNode(deposito.nome))
-//         listaDeposito.appendChild(depositoLista)
-//     })
-// }
-// renderizarDepositoLista()
 
 
 
