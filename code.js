@@ -132,8 +132,6 @@ class Estoque {
 
 const tabelaEsotqueObservers = [
     () => {
-
-
         renderizarEstoqueLista()
         renderizarEstoqueOption('select-estoque-remover')
         renderizarEstoqueOption('select')
@@ -166,7 +164,6 @@ const numero = document.getElementById('numero')
 const keyPressEvent = e => {
     if (e.key !== 'Enter') return
     if (!bairro.value || !numero.value || !nome.value || !rua.value || !nomeDeposito.value) return
-
 
     btnCriarEstoque.click()
     nome.focus()
@@ -219,6 +216,7 @@ const validarFormNovoEstoque = () => {
         rua.value.trim() === '' ||
         bairro.value.trim() === '' ||
         numero.value.trim() === ''
+         
 
     )
 }
@@ -252,6 +250,7 @@ const myFunctionDeposito = () => {
 btnCriarDeposito.addEventListener('click', () => {
     const estoque = myFunctionDeposito()
     renderizarDepositoLista(estoque)
+    nomeDeposito.value = ''
 })
 
 const renderizarDepositoLista = (estoque) => {
@@ -264,7 +263,6 @@ const renderizarDepositoLista = (estoque) => {
         tagDepositoLista.appendChild(depositoItemTag)
     })
 }
-
 
 
 
