@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="background">
+    
 <h1 class="cor center">Criar Estoque</h1>
 
 <div class="form-input">
@@ -21,13 +22,15 @@
 </div>
 
 <div class="form-input">
-    <label for="bairro">Bairro: </label><input placeholder="Bairro" id="bairro">
+    <label for="numero">Número: </label><input placeholder="Número" id="numero"/>
 </div>
 
 <div class="form-input">
-    <label for="numero">Número: </label><input placeholder="Número" id="numero"/>
+    <label for="bairro">Bairro: </label><input placeholder="Bairro" id="bairro">
 </div>
-<button onclick="criarEstoque()" id="btn-criarEstoque">Criar Estoque</button>
+
+
+<button class="buttonCriarEstoque"  onclick="criarEstoque()" id="btn-criarEstoque">Criar Estoque</button>
 
 <ul id="lista-estoques"></ul>
 
@@ -35,7 +38,7 @@
 <select id="select-estoque-remover">
     <option></option>
 </select>
-<button onclick="removerEstoque()">Remover Estoque</button>
+<button class="buttonRemoverEstoque" onclick="removerEstoque()">Remover Estoque</button>
 
 <h1 class="cor center">Criação de depósito</h1>
 
@@ -51,7 +54,7 @@
 <!--    <label for="quantidade-item">Quantidade: </label><input id="quantidade-item"/>-->
 <!--</div>-->
 
-<button id="btn-criar-deposito">Criar depósito nesse Estoque</button>
+<button class="buttonCriarDeposito" id="btn-criar-deposito">Criar depósito</button>
 
 
 <!--<button id="btn-criarItem">Criar item</button>-->

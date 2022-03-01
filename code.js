@@ -180,8 +180,6 @@ const resetFormEstoque = () => {
     rua.value = ''
     bairro.value = ''
     numero.value = ''
-
-
 }
 
 const renderizarEstoqueLista = () => {
@@ -191,7 +189,7 @@ const renderizarEstoqueLista = () => {
         const estoqueItemLista = document.createElement('li')
         estoqueItemLista.setAttribute('id', `estoque_${estoque.id}`)
         estoqueItemLista.appendChild(document.createTextNode(estoque.nome + ' ' + estoque.rua + ' ' +
-            estoque.bairro + ' ' + estoque.numero))
+        estoque.numero + ' ' + estoque.bairro))
         listaEstoques.appendChild(estoqueItemLista)
     })
 }
@@ -216,8 +214,6 @@ const validarFormNovoEstoque = () => {
         rua.value.trim() === '' ||
         bairro.value.trim() === '' ||
         numero.value.trim() === ''
-         
-
     )
 }
 
@@ -247,7 +243,7 @@ const myFunctionDeposito = () => {
     return itemEncontradoDropDown
 }
 
-btnCriarDeposito.addEventListener('click', () => {
+btnCriarDeposito.addEventListener('click',  () => {
     const estoque = myFunctionDeposito()
     renderizarDepositoLista(estoque)
     nomeDeposito.value = ''
@@ -292,14 +288,6 @@ const renderizarDepositoLista = (estoque) => {
 
 
 
-// btnCriarDeposito.addEventListener('click', () =>{
-//         if (!validarFormNovoDeposito()) return
-//     const item = new Deposito(nomeDeposito.value)
-//     tabelaDeposito.push(item)
-
-//     resetFormDeposito()
-//     console.log(item)
-// })
 
 
 
