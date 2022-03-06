@@ -132,9 +132,12 @@ class Estoque {
 
 const tabelaEsotqueObservers = [
     () => {
+        // renderizarDepositoOption('select-deposito')
         renderizarEstoqueLista()
         renderizarEstoqueOption('select-estoque-remover')
         renderizarEstoqueOption('select')
+        
+
     }
 ]
 
@@ -151,7 +154,7 @@ const removerEstoquePorId = (id) => {
     tabelaEstoque = tabelaEstoque.filter(estoque => estoque.id !== id)
     notifyObservers()
 }
-
+const btnCriarItem = document.getElementById('btn-criar-item')
 const btnCriarDeposito = document.getElementById('btn-criar-deposito')
 const nomeDeposito = document.getElementById('nome-deposito')
 const btnCriarEstoque = document.getElementById('btn-criarEstoque')
@@ -164,7 +167,6 @@ const numero = document.getElementById('numero')
 const keyPressEvent = e => {
     if (e.key !== 'Enter') return
     if (!bairro.value || !numero.value || !nome.value || !rua.value || !nomeDeposito.value) return
-
     btnCriarEstoque.click()
     nome.focus()
 }
@@ -189,7 +191,7 @@ const renderizarEstoqueLista = () => {
         const estoqueItemLista = document.createElement('li')
         estoqueItemLista.setAttribute('id', `estoque_${estoque.id}`)
         estoqueItemLista.appendChild(document.createTextNode(estoque.nome + ' ' + estoque.rua + ' ' +
-        estoque.numero + ' ' + estoque.bairro))
+            estoque.numero + ' ' + estoque.bairro))
         listaEstoques.appendChild(estoqueItemLista)
     })
 }
@@ -233,18 +235,18 @@ const removerEstoque = () => {
     removerEstoquePorId(idEstoqueSelecionado)
 }
 
-const myFunctionDeposito = () => {
+const criarDeposito = () => {
     const select = document.getElementById('select')
     const itemSelecionado = Number(select.value)
     const itemEncontradoDropDown = tabelaEstoque.find(est => est.id === itemSelecionado)
     if (itemEncontradoDropDown) {
-        console.log(itemEncontradoDropDown.criarDeposito(nomeDeposito.value))
+         itemEncontradoDropDown.criarDeposito(nomeDeposito.value)
     }
     return itemEncontradoDropDown
 }
 
-btnCriarDeposito.addEventListener('click',  () => {
-    const estoque = myFunctionDeposito()
+btnCriarDeposito.addEventListener('click', () => {
+    const estoque = criarDeposito()
     renderizarDepositoLista(estoque)
     nomeDeposito.value = ''
 })
@@ -260,15 +262,11 @@ const renderizarDepositoLista = (estoque) => {
     })
 }
 
-
-
-
-
-
-
-
-
-
+btnCriarItem.addEventListener('click', () => {
+    const imputItemNome = document.getElementById('nome-item')
+    imputItemNome.innerHTML = ''
+    
+})
 
 
 

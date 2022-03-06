@@ -50,14 +50,27 @@
     <label for="nome-deposito">Nome depósito: </label><input placeholder="Nome" id="nome-deposito"/>
 </div>
 
-<!--<div class="form-input">-->
-<!--    <label for="quantidade-item">Quantidade: </label><input id="quantidade-item"/>-->
-<!--</div>-->
-
 <button class="buttonCriarDeposito" id="btn-criar-deposito">Criar depósito</button>
 
+<h1 class="cor center">Criação de Item</h1><p>
 
-<!--<button id="btn-criarItem">Criar item</button>-->
+    <label for="select">Selecione o Estoque:</label>
+    <select id="select">
+        <option></option>
+    </select>
+    <label for="select-deposito">Depósitos:</label>
+    <select id="select-deposito">
+        <option></option>
+    </select>
+
+<div>
+    <label for="criar-item">Item:</label> <input placeholder="nome / tamanho" id="nome-item"/> <input placeholder="quantidade" id="quantidade"/> <p>
+</div>
+
+    <button class="buttonCriarItem "id="btn-criar-item">Criar item</button>
+
+    <ul id="lista-itens"></ul>
+
 
 
 
