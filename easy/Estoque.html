@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criacão de Estoque</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="background">
+<h1>Controle de Estoque</h1>
+
+<div>
+    <h3>Cadastro de item de estoque</h3>
+    <form id="form-item">
+        <div style="margin-bottom: 20px">
+            <label for="nome-item">Item:</label>
+            <input placeholder="Descrição" id="nome-item"/>
+        </div>
+
+        <div style="margin-bottom: 20px">
+            <label for="unidade-medida-item">Unidade de medida:</label>
+            <select id="unidade-medida-item">
+                <option value=""></option>
+                <option value="un">un</option>
+                <option value="lata">lata</option>
+                <option value="290ml">290ml</option>
+                <option value="500ml">500ml</option>
+                <option value="600ml">600ml</option>
+                <option value="1l">1l</option>
+                <option value="2l">2l</option>
+                <option value="kg">kg</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 20px">
+            <label for="preco-item">Preço:</label>
+            <input placeholder="Preço" id="preco-item" type="number" min="0.01" step="any"/>
+        </div>
+
+        <button type="submit" id="criar-item-btn">Criar Item</button>
+    </form>
+
+    <div style="margin-top: 10px">
+        <table id="tabela-itens">
+            <tr>
+                <th>Descrição</th>
+                <th>UM</th>
+                <th>Preço</th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div style="margin-top: 200px">
+    <h3>Adicionar itens no depósito</h3>
+
+    <form>
+        <label for="itens-estocaveis-select">Item:</label>
+        <select id="itens-estocaveis-select">
+            <option value="Coca 600ml">Coca 600ml</option>
+        </select>
+
+        <div style="margin-bottom: 20px">
+            <label for="preco-item">Quantidade:</label>
+            <input placeholder="Quantidade" id="quantidade-item" type="number" min="1"/>
+        </div>
+
+        <button type="submit" id="adicionar-item-dep-btn">Adicionar Item</button>
+    </form>
+
+    <table id="tabela-itens-dep">
+        <tr>
+            <th>Descrição</th>
+            <th>UM</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+        </tr>
+    </table>
+</div>
+
+<script src="code.js"></script>
+</body>
+
+</html>
