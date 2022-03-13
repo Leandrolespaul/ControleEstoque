@@ -102,7 +102,118 @@ const onFormCreateItemSubmit = (e) => {
     tdDescricao.innerHTML = descricao
     tdUnidadeMedida.innerHTML = unidadeMedida
     tdPreco.innerHTML = preco
+
+
+
+    const tagItem = document.getElementById('itens-estocaveis-select')
+    tagItem.innerHTML = ''
+    tagItem.appendChild(document.createElement('option'))
+    itensEstocaveis.forEach(item => {
+        const optionItem = document.createElement('option')
+        optionItem.label = `${item.descricao} - ${item.unidadeMedida}`
+        optionItem.value = item.id
+        optionItem.id = item.id
+        tagItem.add(optionItem)
+    })
+
+
+
+const btnAddItem = document.getElementById('adicionar-item-dep-btn')
+
+
+btnAddItem.addEventListener('click', () => {
+    const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
+    const imputQuantidade = document.getElementById('quantidade-item')
+    const idItemSelecao = Number(dropdowItemSelecao.value)
+    const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
+    if (dropDownSelecao) {
+        
+      dropDownSelecao.deposito.adicionarItem(dropDownSelecao.descricao, imputQuantidade.value)
+        
+        // dropDownSelecao.quantidade = imputQuantidade.value
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    // const tabelaInterfaceItemQuantidade = document.getElementById('tabela-itens-dep')
+    // const trItem = document.getElementById('tr')
+    // const tdDescricaoItem = document.createElement('td')
+    // const tdUnidadeMedidaItem = document.createElement('td')
+    // const tdPrecoItem = document.createElement('td')
+    // const tdQuantidadeItem = document.createElement('td')
+
+    // trItem.appendChild(tdDescricaoItem)
+    // trItem.appendChild(tdUnidadeMedidaItem)
+    // trItem.appendChild(tdPrecoItem)
+    // trItem.appendChild(tdQuantidadeItem)
+
+    // tabelaInterfaceItemQuantidade.appendChild(trItem)
+
+
+
+})
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.getElementById('adicionar-item-dep-btn')
+    .addEventListener('click', onFormCreateItemSubmit)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 document.getElementById('criar-item-btn')
     .addEventListener('click', onFormCreateItemSubmit)
