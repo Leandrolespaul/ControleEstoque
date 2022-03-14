@@ -118,102 +118,51 @@ const onFormCreateItemSubmit = (e) => {
 
 
 
-const btnAddItem = document.getElementById('adicionar-item-dep-btn')
+    const btnAddItem = document.getElementById('adicionar-item-dep-btn')
 
 
-btnAddItem.addEventListener('click', () => {
-    const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
-    const imputQuantidade = document.getElementById('quantidade-item')
-    const idItemSelecao = Number(dropdowItemSelecao.value)
-    const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
-    if (dropDownSelecao) {
-        
-      dropDownSelecao.deposito.adicionarItem(dropDownSelecao.descricao, imputQuantidade.value)
-        
-        // dropDownSelecao.quantidade = imputQuantidade.value
-    }
+    btnAddItem.addEventListener('click', () => {
+        const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
+        const imputQuantidade = document.getElementById('quantidade-item')
+
+        const idItemSelecao = Number(dropdowItemSelecao.value)
+        const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
+        if (dropDownSelecao) {
+            deposito.adicionarItem(dropDownSelecao, Number(imputQuantidade.value))
+            
+            
+
+            const tabelaInterfaceItemQuantidade = document.getElementById('tabela-itens-dep')
+            const trItem = document.createElement('tr')
+            const tdDescricaoItem = document.createElement('td')
+            const tdUnidadeMedidaItem = document.createElement('td')
+            const tdPrecoItem = document.createElement('td')
+            const tdQuantidadeItem = document.createElement('td')
 
 
+            trItem.appendChild(tdDescricaoItem)
+            trItem.appendChild(tdUnidadeMedidaItem)
+            trItem.appendChild(tdPrecoItem)
+            trItem.appendChild(tdQuantidadeItem)
 
 
+            tabelaInterfaceItemQuantidade.appendChild(trItem)
 
+            tdDescricaoItem.innerHTML = dropDownSelecao.descricao
+            tdUnidadeMedidaItem.innerHTML = dropDownSelecao.unidadeMedida
+            tdPrecoItem.innerHTML = dropDownSelecao.preco
+            tdQuantidadeItem.innerHTML = Number(imputQuantidade.value)
+            
+            imputQuantidade.value = ''
+          
+            
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-    
-    // const tabelaInterfaceItemQuantidade = document.getElementById('tabela-itens-dep')
-    // const trItem = document.getElementById('tr')
-    // const tdDescricaoItem = document.createElement('td')
-    // const tdUnidadeMedidaItem = document.createElement('td')
-    // const tdPrecoItem = document.createElement('td')
-    // const tdQuantidadeItem = document.createElement('td')
-
-    // trItem.appendChild(tdDescricaoItem)
-    // trItem.appendChild(tdUnidadeMedidaItem)
-    // trItem.appendChild(tdPrecoItem)
-    // trItem.appendChild(tdQuantidadeItem)
-
-    // tabelaInterfaceItemQuantidade.appendChild(trItem)
-
-
-
-})
-
-
+    })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 document.getElementById('adicionar-item-dep-btn')
     .addEventListener('click', onFormCreateItemSubmit)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 document.getElementById('criar-item-btn')
     .addEventListener('click', onFormCreateItemSubmit)
