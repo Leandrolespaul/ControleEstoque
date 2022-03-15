@@ -62,10 +62,8 @@ class Deposito {
         return 0
     }
 
-    reposicaoItem(item) {
-        return this.itens.filter(item => {
-            if (item.quantidade <= 10) return item.item
-        })
+    reposicaoItem() {
+        return this.itens.filter(item => item.quantidade <= 10)
     }
 }
 
