@@ -187,5 +187,3 @@ document.getElementById('criar-item-btn')
 // const itemListado = document.createElement('li')
 // itemListado.appendChild(document.createTextNode(item.nome))
 // listaItem.appendChild(itemListado)
-
-//Leandro
