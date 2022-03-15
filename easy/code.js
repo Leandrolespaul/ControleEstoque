@@ -15,6 +15,7 @@ class ItemEstoque {
 class Deposito {
 
     itens = []
+    observers = []
 
     constructor(nome) {
         this.nome = nome
@@ -26,14 +27,14 @@ class Deposito {
         const itemEstoque = this.itens.find(itemEst => itemEst.item === item)
         if (itemEstoque) {
             itemEstoque.quantidade += quantidade
-
+            this.observers.forEach(func => func())
             return item
         }
         this.itens.push({
             item,
             quantidade
         })
-
+        this.observers.forEach(func => func())
         return item
     }
 
@@ -42,6 +43,7 @@ class Deposito {
         const itemEstoque = this.itens.find(itemEst => itemEst.item === item)
         if (itemEstoque) {
             itemEstoque.quantidade -= quantidade
+            this.observers.forEach(func => func())
             return item
         }
 
@@ -104,7 +106,6 @@ const onFormCreateItemSubmit = (e) => {
     tdPreco.innerHTML = preco
 
 
-
     const tagItem = document.getElementById('itens-estocaveis-select')
     tagItem.innerHTML = ''
     tagItem.appendChild(document.createElement('option'))
@@ -115,109 +116,73 @@ const onFormCreateItemSubmit = (e) => {
         optionItem.id = item.id
         tagItem.add(optionItem)
     })
+}
+
+const renderizarItensEstoque = () => {
+    const tabelaInterfaceItemQuantidade = document.getElementById('tabela-itens-dep')
+    const cabecalhoItensDep = document.getElementById('cabecalho-itens-dep')
+
+    tabelaInterfaceItemQuantidade.innerHTML = ''
+    tabelaInterfaceItemQuantidade.appendChild(cabecalhoItensDep)
+
+    deposito.itens.forEach(itemDep => {
+        const trItem = document.createElement('tr')
+        const tdDescricaoItem = document.createElement('td')
+        const tdUnidadeMedidaItem = document.createElement('td')
+        const tdPrecoItem = document.createElement('td')
+        const tdQuantidadeItem = document.createElement('td')
 
 
-
-    const btnAddItem = document.getElementById('adicionar-item-dep-btn')
-
-
-    btnAddItem.addEventListener('click', () => {
-        const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
-        const imputQuantidade = document.getElementById('quantidade-item')
-
-        const idItemSelecao = Number(dropdowItemSelecao.value)
-        const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
-        if (dropDownSelecao) {
-            deposito.adicionarItem(dropDownSelecao, Number(imputQuantidade.value))
-            
-            
-
-            const tabelaInterfaceItemQuantidade = document.getElementById('tabela-itens-dep')
-            const trItem = document.createElement('tr')
-            const tdDescricaoItem = document.createElement('td')
-            const tdUnidadeMedidaItem = document.createElement('td')
-            const tdPrecoItem = document.createElement('td')
-            const tdQuantidadeItem = document.createElement('td')
+        trItem.appendChild(tdDescricaoItem)
+        trItem.appendChild(tdUnidadeMedidaItem)
+        trItem.appendChild(tdPrecoItem)
+        trItem.appendChild(tdQuantidadeItem)
 
 
-            trItem.appendChild(tdDescricaoItem)
-            trItem.appendChild(tdUnidadeMedidaItem)
-            trItem.appendChild(tdPrecoItem)
-            trItem.appendChild(tdQuantidadeItem)
+        tabelaInterfaceItemQuantidade.appendChild(trItem)
 
-
-            tabelaInterfaceItemQuantidade.appendChild(trItem)
-
-            tdDescricaoItem.innerHTML = dropDownSelecao.descricao
-            tdUnidadeMedidaItem.innerHTML = dropDownSelecao.unidadeMedida
-            tdPrecoItem.innerHTML = dropDownSelecao.preco
-            tdQuantidadeItem.innerHTML = Number(imputQuantidade.value)
-            
-            imputQuantidade.value = ''
-          
-            
-        }
-
+        tdDescricaoItem.innerHTML = itemDep.item.descricao
+        tdUnidadeMedidaItem.innerHTML = itemDep.item.unidadeMedida
+        tdPrecoItem.innerHTML = itemDep.item.preco
+        tdQuantidadeItem.innerHTML = itemDep.quantidade
     })
 }
 
+deposito.observers.push(renderizarItensEstoque)
+
+const onFormAddItemToDep = (e) => {
+    e.preventDefault()
+    const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
+    const inputQuantidade = document.getElementById('quantidade-item')
+
+    const idItemSelecao = Number(dropdowItemSelecao.value)
+    const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
+    if (!dropDownSelecao) return
+    deposito.adicionarItem(dropDownSelecao, Number(inputQuantidade.value))
+
+    document.getElementById('form-add-items-dep').reset()
+}
+
+const btnRemoverItem = document.getElementById('remover-item-dep-btn')
+btnRemoverItem.addEventListener('click', (e) => {
+    e.preventDefault()
+    const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
+    const inputQuantidade = document.getElementById('quantidade-item')
+
+    const idItemSelecao = Number(dropdowItemSelecao.value)
+    const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
+    if (dropDownSelecao) {
+        deposito.removerItem(dropDownSelecao, inputQuantidade.value)
+        document.getElementById('form-add-items-dep').reset()
+    }
+})
+
+
 document.getElementById('adicionar-item-dep-btn')
-    .addEventListener('click', onFormCreateItemSubmit)
+    .addEventListener('click', onFormAddItemToDep)
 
 document.getElementById('criar-item-btn')
     .addEventListener('click', onFormCreateItemSubmit)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // const listaItem = document.getElementById('lista-itens')

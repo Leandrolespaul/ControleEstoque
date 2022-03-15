@@ -1,5 +1,4 @@
 
-
 .cor {
     color: rgb(0, 0, 0)
 }
@@ -12,40 +11,40 @@
     margin: 10px
 }
 
-  
+
 .buttonCriarEstoque {
-  background-color: #fbeee0;
-  border: 2px solid #422800;
-  border-radius: 30px;
-  box-shadow: #422800 4px 4px 0 0;
-  color: #422800;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: 600;
-  font-size: 14px;
-  padding: 5px 10px;
-  line-height: 10px;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    color: #422800;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 5px 10px;
+    line-height: 10px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
 }
 
 .buttonCriarEstoque:hover {
-  background-color: #fff;
+    background-color: #fff;
 }
 
 .buttonCriarEstoque:active {
-  box-shadow: #422800 2px 2px 0 0;
-  transform: translate(2px, 2px);
+    box-shadow: #422800 2px 2px 0 0;
+    transform: translate(2px, 2px);
 }
 
 @media (min-width: 768px) {
-  .buttonCriarEstoque {
-    min-width: 120px;
-    padding: 5px 15px;
-  }
+    .buttonCriarEstoque {
+        min-width: 120px;
+        padding: 5px 15px;
+    }
 }
 
 .buttonRemoverEstoque {
@@ -65,25 +64,25 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-  }
-  
-  .buttonRemoverEstoque:hover {
+}
+
+.buttonRemoverEstoque:hover {
     background-color: #fff;
-  }
-  
-  .buttonRemoverEstoque:active {
+}
+
+.buttonRemoverEstoque:active {
     box-shadow: #422800 2px 2px 0 0;
     transform: translate(2px, 2px);
-  }
-  
-  @media (min-width: 768px) {
+}
+
+@media (min-width: 768px) {
     .buttonRemoverEstoque {
-      min-width: 120px;
-      padding: 5px 15px;
+        min-width: 120px;
+        padding: 5px 15px;
     }
-  }
+}
 
-  .buttonCriarDeposito {
+.buttonCriarDeposito {
     background-color: #fbeee0;
     border: 2px solid #422800;
     border-radius: 30px;
@@ -100,29 +99,29 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-  }
-  
-  .buttonCriarDeposito:hover {
+}
+
+.buttonCriarDeposito:hover {
     background-color: #fff;
-  }
-  
-  .buttonCriarDeposito:active {
+}
+
+.buttonCriarDeposito:active {
     box-shadow: #422800 2px 2px 0 0;
     transform: translate(2px, 2px);
-  }
-  
-  @media (min-width: 768px) {
+}
+
+@media (min-width: 768px) {
     .buttonCriarDeposito {
-      min-width: 120px;
-      padding: 5px 15px;
+        min-width: 120px;
+        padding: 5px 15px;
     }
-  }
+}
 
-  .background {
+.background {
     /*background:rgb(128, 128, 128)*/
-  }
-  
-  .buttonCriarItem {
+}
+
+.buttonCriarItem {
     background-color: #fbeee0;
     border: 2px solid #422800;
     border-radius: 30px;
@@ -139,20 +138,24 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-  }
-  
-  .buttonCriarItem:hover {
+}
+
+.buttonCriarItem:hover {
     background-color: #fff;
-  }
-  
-  .buttonCriarItem:active {
+}
+
+.buttonCriarItem:active {
     box-shadow: #422800 2px 2px 0 0;
     transform: translate(2px, 2px);
-  }
-  
-  @media (min-width: 768px) {
+}
+
+@media (min-width: 768px) {
     .buttonCriarItem {
-      min-width: 120px;
-      padding: 5px 15px;
+        min-width: 120px;
+        padding: 5px 15px;
     }
-  }
+}
+
+table, th, td {
+    border: 1px solid black;
+}
