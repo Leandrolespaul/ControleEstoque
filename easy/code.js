@@ -38,7 +38,7 @@ class Deposito {
         return item
     }
 
-    removerItem(item, quantidade) {
+    removerQuantidadeItem(item, quantidade) {
         if (quantidade < 0) throw Error('Quantidade Removida tem que ser maior que 0')
         const itemEstoque = this.itens.find(itemEst => itemEst.item === item)
         if (itemEstoque) {
@@ -74,6 +74,12 @@ const deposito = new Deposito('Restaurante')
 const itensEstocaveis = []
 
 
+function alterarPonto(preco) {
+    preco = parseFloat(preco).toFixed(2)
+    return `R$${preco.replace(".", ',')}`
+}
+
+
 const onFormCreateItemSubmit = (e) => {
     e.preventDefault()
     const descricao = document.getElementById('nome-item').value
@@ -98,10 +104,10 @@ const onFormCreateItemSubmit = (e) => {
     tr.appendChild(tdPreco)
 
     tabelaItensInterface.appendChild(tr)
-
     tdDescricao.innerHTML = descricao
     tdUnidadeMedida.innerHTML = unidadeMedida
-    tdPreco.innerHTML = preco
+    tdPreco.innerHTML = alterarPonto(preco)
+
 
 
     const tagItem = document.getElementById('itens-estocaveis-select')
@@ -136,14 +142,22 @@ const renderizarItensEstoque = () => {
         trItem.appendChild(tdPrecoItem)
         trItem.appendChild(tdQuantidadeItem)
 
-
         tabelaInterfaceItemQuantidade.appendChild(trItem)
-
         tdDescricaoItem.innerHTML = itemDep.item.descricao
         tdUnidadeMedidaItem.innerHTML = itemDep.item.unidadeMedida
-        tdPrecoItem.innerHTML = itemDep.item.preco
+        tdPrecoItem.innerHTML = alterarPonto(itemDep.item.preco)
         tdQuantidadeItem.innerHTML = itemDep.quantidade
     })
+
+
+    const tagValorTotal = document.getElementById('valor-total')
+
+    tagValorTotal.innerHTML = ''
+    const item = deposito.getValorTotal()
+    const tagLiValorTotal = document.createElement('li')
+    tagLiValorTotal.appendChild(document.createTextNode(`Valor total dos itens R$${item.toFixed(2).replace(".", ',')}`))
+    tagValorTotal.appendChild(tagLiValorTotal)
+
 }
 
 deposito.observers.push(renderizarItensEstoque)
@@ -160,9 +174,8 @@ const onFormAddItemToDep = (e) => {
 
     document.getElementById('form-add-items-dep').reset()
 }
-
-const btnRemoverItem = document.getElementById('remover-item-dep-btn')
-btnRemoverItem.addEventListener('click', (e) => {
+const btnRemoverQuantidadeItem = document.getElementById('remover-item-dep-btn')
+btnRemoverQuantidadeItem.addEventListener('click', (e) => {
     e.preventDefault()
     const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
     const inputQuantidade = document.getElementById('quantidade-item')
@@ -170,20 +183,13 @@ btnRemoverItem.addEventListener('click', (e) => {
     const idItemSelecao = Number(dropdowItemSelecao.value)
     const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
     if (dropDownSelecao) {
-        deposito.removerItem(dropDownSelecao, inputQuantidade.value)
+        deposito.removerQuantidadeItem(dropDownSelecao, inputQuantidade.value)
         document.getElementById('form-add-items-dep').reset()
     }
 })
-
 
 document.getElementById('adicionar-item-dep-btn')
     .addEventListener('click', onFormAddItemToDep)
 
 document.getElementById('criar-item-btn')
     .addEventListener('click', onFormCreateItemSubmit)
-
-
-// const listaItem = document.getElementById('lista-itens')
-// const itemListado = document.createElement('li')
-// itemListado.appendChild(document.createTextNode(item.nome))
-// listaItem.appendChild(itemListado)
