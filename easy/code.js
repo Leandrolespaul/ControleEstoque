@@ -155,7 +155,7 @@ const renderizarItensEstoque = () => {
     tagValorTotal.innerHTML = ''
     const item = deposito.getValorTotal()
     const tagLiValorTotal = document.createElement('li')
-    tagLiValorTotal.appendChild(document.createTextNode(`Valor total dos itens R$${item.toFixed(2).replace(".", ',')}`))
+    tagLiValorTotal.appendChild(document.createTextNode(`Valor total dos itens, ${alterarPonto(item)}`))
     tagValorTotal.appendChild(tagLiValorTotal)
 
 }
