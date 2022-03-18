@@ -49,6 +49,13 @@ class Deposito {
 
     }
 
+    removerItemCriado(item) {
+        this.itens = this.itens.filter(itemEst => itemEst.item !== item)
+        this.observers.forEach(func => func())
+        return item
+    }
+    
+
     getValorTotal() {
         return this.itens.reduce((ac, itemEst) => ac + (itemEst.quantidade * itemEst.item.preco), 0)
 
@@ -72,6 +79,8 @@ const deposito = new Deposito('Restaurante')
 
 // Simulação de tabela de itens estocáveis no banco de dados
 const itensEstocaveis = []
+const arrayUnico = []
+
 
 
 function alterarPonto(preco) {
@@ -107,8 +116,6 @@ const onFormCreateItemSubmit = (e) => {
     tdDescricao.innerHTML = descricao
     tdUnidadeMedida.innerHTML = unidadeMedida
     tdPreco.innerHTML = alterarPonto(preco)
-
-
 
     const tagItem = document.getElementById('itens-estocaveis-select')
     tagItem.innerHTML = ''
@@ -151,13 +158,23 @@ const renderizarItensEstoque = () => {
 
 
     const tagValorTotal = document.getElementById('valor-total')
-
     tagValorTotal.innerHTML = ''
     const item = deposito.getValorTotal()
     const tagLiValorTotal = document.createElement('li')
     tagLiValorTotal.appendChild(document.createTextNode(`Valor total dos itens, ${alterarPonto(item)}`))
     tagValorTotal.appendChild(tagLiValorTotal)
 
+
+
+    const tagReposicao = document.getElementById('reposicao')
+    tagReposicao.innerHTML = ''
+    const itemRepor = deposito.reposicaoItem()
+    itemRepor.forEach(item => {
+        const tagLiReposicao = document.createElement('li')
+    tagLiReposicao.appendChild(document.createTextNode(`Item que precisa repor: ${item.item.descricao} | ${item.item.unidadeMedida} | ${item.quantidade} quantidade(s)`))
+    tagReposicao.appendChild(tagLiReposicao)
+    })
+    
 }
 
 deposito.observers.push(renderizarItensEstoque)
@@ -187,6 +204,18 @@ btnRemoverQuantidadeItem.addEventListener('click', (e) => {
         document.getElementById('form-add-items-dep').reset()
     }
 })
+
+const btnRemoverItem = document.getElementById('remover-item-cadastrado')
+btnRemoverItem.addEventListener('click', (e) => {
+    const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
+    const idItemSelecao = Number(dropdowItemSelecao.value)
+    const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
+    if (dropDownSelecao) {
+        deposito.removerItemCriado(dropDownSelecao)
+        document.getElementById('form-add-items-dep').reset()
+    }
+})
+
 
 document.getElementById('adicionar-item-dep-btn')
     .addEventListener('click', onFormAddItemToDep)
