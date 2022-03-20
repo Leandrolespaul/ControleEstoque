@@ -49,13 +49,12 @@ class Deposito {
 
     }
 
-    removerItemCriado(item) {
+    removerItemDeposito(item) {
         this.itens = this.itens.filter(itemEst => itemEst.item !== item)
         this.observers.forEach(func => func())
         return item
     }
     
-
     getValorTotal() {
         return this.itens.reduce((ac, itemEst) => ac + (itemEst.quantidade * itemEst.item.preco), 0)
 
@@ -77,9 +76,9 @@ class Deposito {
 
 const deposito = new Deposito('Restaurante')
 
+
 // Simulação de tabela de itens estocáveis no banco de dados
 const itensEstocaveis = []
-const arrayUnico = []
 
 
 
@@ -154,6 +153,10 @@ const renderizarItensEstoque = () => {
         tdUnidadeMedidaItem.innerHTML = itemDep.item.unidadeMedida
         tdPrecoItem.innerHTML = alterarPonto(itemDep.item.preco)
         tdQuantidadeItem.innerHTML = itemDep.quantidade
+
+
+
+
     })
 
 
@@ -171,10 +174,10 @@ const renderizarItensEstoque = () => {
     const itemRepor = deposito.reposicaoItem()
     itemRepor.forEach(item => {
         const tagLiReposicao = document.createElement('li')
-    tagLiReposicao.appendChild(document.createTextNode(`Item que precisa repor: ${item.item.descricao} | ${item.item.unidadeMedida} | ${item.quantidade} quantidade(s)`))
-    tagReposicao.appendChild(tagLiReposicao)
+        tagLiReposicao.appendChild(document.createTextNode(`Item que precisa repor: ${item.item.descricao} | ${item.item.unidadeMedida} | ${item.quantidade} quantidade(s)`))
+        tagReposicao.appendChild(tagLiReposicao)
     })
-    
+
 }
 
 deposito.observers.push(renderizarItensEstoque)
@@ -205,16 +208,30 @@ btnRemoverQuantidadeItem.addEventListener('click', (e) => {
     }
 })
 
-const btnRemoverItem = document.getElementById('remover-item-cadastrado')
+const btnRemoverItem = document.getElementById('remover-item-deposito')
 btnRemoverItem.addEventListener('click', (e) => {
+    e.preventDefault()
     const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
     const idItemSelecao = Number(dropdowItemSelecao.value)
     const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
     if (dropDownSelecao) {
-        deposito.removerItemCriado(dropDownSelecao)
+        deposito.removerItemDeposito(dropDownSelecao)
         document.getElementById('form-add-items-dep').reset()
     }
 })
+
+// const btnRemoverItemCadastrado = document.getElementById('remover-item-cadastrado')
+// btnRemoverItemCadastrado.addEventListener('click', (e) => {
+//     e.preventDefault()
+//     const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
+//     const idItemSelecao = Number(dropdowItemSelecao.value)
+
+//     const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
+//     if (dropDownSelecao) {
+//         itensEstocaveis.removerItemEstoque(dropDownSelecao)
+//         document.getElementById('form-add-items-dep').reset()
+//     }
+// })
 
 
 document.getElementById('adicionar-item-dep-btn')
