@@ -1,3 +1,7 @@
+
+
+
+
 let proximoId = 1
 const criarId = () => {
     return proximoId++
@@ -10,6 +14,8 @@ class ItemEstoque {
         this.preco = preco
         this.id = criarId()
     }
+
+
 }
 
 class Deposito {
@@ -54,7 +60,7 @@ class Deposito {
         this.observers.forEach(func => func())
         return item
     }
-    
+
     getValorTotal() {
         return this.itens.reduce((ac, itemEst) => ac + (itemEst.quantidade * itemEst.item.preco), 0)
 
@@ -71,6 +77,8 @@ class Deposito {
     reposicaoItem() {
         return this.itens.filter(item => item.quantidade <= 10)
     }
+
+
 }
 
 
@@ -79,6 +87,7 @@ const deposito = new Deposito('Restaurante')
 
 // Simulação de tabela de itens estocáveis no banco de dados
 const itensEstocaveis = []
+
 
 
 
@@ -154,9 +163,6 @@ const renderizarItensEstoque = () => {
         tdPrecoItem.innerHTML = alterarPonto(itemDep.item.preco)
         tdQuantidadeItem.innerHTML = itemDep.quantidade
 
-
-
-
     })
 
 
@@ -211,27 +217,32 @@ btnRemoverQuantidadeItem.addEventListener('click', (e) => {
 const btnRemoverItem = document.getElementById('remover-item-deposito')
 btnRemoverItem.addEventListener('click', (e) => {
     e.preventDefault()
+   
     const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
     const idItemSelecao = Number(dropdowItemSelecao.value)
     const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
     if (dropDownSelecao) {
-        deposito.removerItemDeposito(dropDownSelecao)
+        const dialog = confirm("Deseja Excluir o item?");
+        if (dialog) {
+            deposito.removerItemDeposito(dropDownSelecao)
+        }
         document.getElementById('form-add-items-dep').reset()
     }
 })
 
-// const btnRemoverItemCadastrado = document.getElementById('remover-item-cadastrado')
-// btnRemoverItemCadastrado.addEventListener('click', (e) => {
-//     e.preventDefault()
-//     const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
-//     const idItemSelecao = Number(dropdowItemSelecao.value)
+const btnRemoverItemCadastrado = document.getElementById('remover-item-cadastrado')
+btnRemoverItemCadastrado.addEventListener('click', (e) => {
+    e.preventDefault()
+    const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
+    const idItemSelecao = Number(dropdowItemSelecao.value)
+    const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
+    if (dropDownSelecao) {
 
-//     const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
-//     if (dropDownSelecao) {
-//         itensEstocaveis.removerItemEstoque(dropDownSelecao)
-//         document.getElementById('form-add-items-dep').reset()
-//     }
-// })
+        document.getElementById('form-add-items-dep').reset()
+    }
+
+
+})
 
 
 document.getElementById('adicionar-item-dep-btn')
