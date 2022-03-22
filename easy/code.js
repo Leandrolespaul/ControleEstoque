@@ -1,7 +1,3 @@
-
-
-
-
 let proximoId = 1
 const criarId = () => {
     return proximoId++
@@ -14,6 +10,9 @@ class ItemEstoque {
         this.preco = preco
         this.id = criarId()
     }
+
+
+
 
 
 }
@@ -84,9 +83,14 @@ class Deposito {
 
 const deposito = new Deposito('Restaurante')
 
-
 // Simulação de tabela de itens estocáveis no banco de dados
 const itensEstocaveis = []
+
+function removerItemEstoque(item) {
+   return itensEstocaveis.filter(itemEst => itemEst !== item)
+
+    
+}
 
 
 
@@ -144,7 +148,7 @@ const renderizarItensEstoque = () => {
     tabelaInterfaceItemQuantidade.innerHTML = ''
     tabelaInterfaceItemQuantidade.appendChild(cabecalhoItensDep)
 
-    deposito.itens.forEach(itemDep => {
+    deposito.itens.forEach(itemDep => { //pegamos os itens dos depositos
         const trItem = document.createElement('tr')
         const tdDescricaoItem = document.createElement('td')
         const tdUnidadeMedidaItem = document.createElement('td')
@@ -217,7 +221,7 @@ btnRemoverQuantidadeItem.addEventListener('click', (e) => {
 const btnRemoverItem = document.getElementById('remover-item-deposito')
 btnRemoverItem.addEventListener('click', (e) => {
     e.preventDefault()
-   
+
     const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
     const idItemSelecao = Number(dropdowItemSelecao.value)
     const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
@@ -230,6 +234,7 @@ btnRemoverItem.addEventListener('click', (e) => {
     }
 })
 
+
 const btnRemoverItemCadastrado = document.getElementById('remover-item-cadastrado')
 btnRemoverItemCadastrado.addEventListener('click', (e) => {
     e.preventDefault()
@@ -237,11 +242,9 @@ btnRemoverItemCadastrado.addEventListener('click', (e) => {
     const idItemSelecao = Number(dropdowItemSelecao.value)
     const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
     if (dropDownSelecao) {
-
-        document.getElementById('form-add-items-dep').reset()
+        removerItemEstoque(dropDownSelecao)
     }
-
-
+    document.getElementById('form-add-items-dep').reset()
 })
 
 
