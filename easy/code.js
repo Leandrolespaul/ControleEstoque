@@ -1,4 +1,3 @@
-//kaique
 
 let itensEstocaveis = []
 
