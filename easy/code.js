@@ -1,7 +1,6 @@
-
+//kaique
 
 let itensEstocaveis = []
-
 
 
 let proximoId = 1
