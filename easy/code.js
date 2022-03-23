@@ -1,3 +1,9 @@
+
+
+let itensEstocaveis = []
+
+
+
 let proximoId = 1
 const criarId = () => {
     return proximoId++
@@ -10,11 +16,6 @@ class ItemEstoque {
         this.preco = preco
         this.id = criarId()
     }
-
-
-
-
-
 }
 
 class Deposito {
@@ -76,24 +77,17 @@ class Deposito {
     reposicaoItem() {
         return this.itens.filter(item => item.quantidade <= 10)
     }
-
-
 }
 
 
 const deposito = new Deposito('Restaurante')
 
-// Simulação de tabela de itens estocáveis no banco de dados
-const itensEstocaveis = []
 
-function removerItemEstoque(item) {
-   return itensEstocaveis.filter(itemEst => itemEst !== item)
+const removerItemEstoque = (item) => {
+  itensEstocaveis = itensEstocaveis.filter(itemEst => itemEst !== item)
+  return item
 
-    
 }
-
-
-
 
 function alterarPonto(preco) {
     preco = parseFloat(preco).toFixed(2)
@@ -139,6 +133,7 @@ const onFormCreateItemSubmit = (e) => {
         optionItem.id = item.id
         tagItem.add(optionItem)
     })
+
 }
 
 const renderizarItensEstoque = () => {
@@ -166,7 +161,6 @@ const renderizarItensEstoque = () => {
         tdUnidadeMedidaItem.innerHTML = itemDep.item.unidadeMedida
         tdPrecoItem.innerHTML = alterarPonto(itemDep.item.preco)
         tdQuantidadeItem.innerHTML = itemDep.quantidade
-
     })
 
 
@@ -230,7 +224,7 @@ btnRemoverItem.addEventListener('click', (e) => {
         if (dialog) {
             deposito.removerItemDeposito(dropDownSelecao)
         }
-        document.getElementById('form-add-items-dep').reset()
+        document.getElementById('form-item').reset()
     }
 })
 
@@ -243,13 +237,17 @@ btnRemoverItemCadastrado.addEventListener('click', (e) => {
     const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
     if (dropDownSelecao) {
         removerItemEstoque(dropDownSelecao)
+        console.log(itensEstocaveis)
+        document.getElementById('form-item').reset()
     }
-    document.getElementById('form-add-items-dep').reset()
+
+
 })
 
 
 document.getElementById('adicionar-item-dep-btn')
     .addEventListener('click', onFormAddItemToDep)
 
-document.getElementById('criar-item-btn')
+document.getElementById('criar-item-btn', 'remover-item-cadastro')
     .addEventListener('click', onFormCreateItemSubmit)
+
