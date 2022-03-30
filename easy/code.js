@@ -1,4 +1,3 @@
-
 let itensEstocaveis = []
 
 
@@ -82,8 +81,8 @@ const deposito = new Deposito('Restaurante')
 
 
 const removerItemEstoque = (item) => {
-  itensEstocaveis = itensEstocaveis.filter(itemEst => itemEst !== item)
-  return item
+    itensEstocaveis = itensEstocaveis.filter(itemEst => itemEst !== item)
+    return item
 
 }
 
@@ -103,35 +102,38 @@ const onFormCreateItemSubmit = (e) => {
     // Testar se tem algum valor vazio nos inputs de criação de itens. Se sim, não fazer nada, retornar
     if (!descricao.trim() || !unidadeMedida.trim() || !preco) return
 
-    const itemEstoque = new ItemEstoque(descricao, unidadeMedida, preco)
-    itensEstocaveis.push(itemEstoque)
+    const renderizarItensEstocaveis = () => {
+        const itemEstoque = new ItemEstoque(descricao, unidadeMedida, preco)
+        itensEstocaveis.push(itemEstoque)
 
-    const tabelaItensInterface = document.getElementById('tabela-itens')
-    const tr = document.createElement('tr')
-    const tdDescricao = document.createElement('td')
-    const tdUnidadeMedida = document.createElement('td')
-    const tdPreco = document.createElement('td')
+        const tabelaItensInterface = document.getElementById('tabela-itens')
+        const tr = document.createElement('tr')
+        const tdDescricao = document.createElement('td')
+        const tdUnidadeMedida = document.createElement('td')
+        const tdPreco = document.createElement('td')
 
-    tr.appendChild(tdDescricao)
-    tr.appendChild(tdUnidadeMedida)
-    tr.appendChild(tdPreco)
+        tr.appendChild(tdDescricao)
+        tr.appendChild(tdUnidadeMedida)
+        tr.appendChild(tdPreco)
 
-    tabelaItensInterface.appendChild(tr)
-    tdDescricao.innerHTML = descricao
-    tdUnidadeMedida.innerHTML = unidadeMedida
-    tdPreco.innerHTML = alterarPonto(preco)
+        tabelaItensInterface.appendChild(tr)
+        tdDescricao.innerHTML = descricao
+        tdUnidadeMedida.innerHTML = unidadeMedida
+        tdPreco.innerHTML = alterarPonto(preco)
 
-    const tagItem = document.getElementById('itens-estocaveis-select')
-    tagItem.innerHTML = ''
-    tagItem.appendChild(document.createElement('option'))
-    itensEstocaveis.forEach(item => {
-        const optionItem = document.createElement('option')
-        optionItem.label = `${item.descricao} - ${item.unidadeMedida}`
-        optionItem.value = item.id
-        optionItem.id = item.id
-        tagItem.add(optionItem)
-    })
+        const tagItem = document.getElementById('itens-estocaveis-select')
+        tagItem.innerHTML = ''
+        tagItem.appendChild(document.createElement('option'))
+        itensEstocaveis.forEach(item => {
+            const optionItem = document.createElement('option')
+            optionItem.label = `${item.descricao} - ${item.unidadeMedida}`
+            optionItem.value = item.id
+            optionItem.id = item.id
+            tagItem.add(optionItem)
+        })
 
+    }
+    renderizarItensEstocaveis()
 }
 
 const renderizarItensEstoque = () => {
@@ -215,12 +217,16 @@ btnRemoverItem.addEventListener('click', (e) => {
     e.preventDefault()
 
     const dropdowItemSelecao = document.getElementById('itens-estocaveis-select')
+    
     const idItemSelecao = Number(dropdowItemSelecao.value)
     const dropDownSelecao = itensEstocaveis.find(item => item.id === idItemSelecao)
     if (dropDownSelecao) {
         const dialog = confirm("Deseja Excluir o item?");
+        
         if (dialog) {
             deposito.removerItemDeposito(dropDownSelecao)
+            
+            
         }
         document.getElementById('form-item').reset()
     }
@@ -238,8 +244,8 @@ btnRemoverItemCadastrado.addEventListener('click', (e) => {
         console.log(itensEstocaveis)
         document.getElementById('form-item').reset()
     }
-
-
+   
+    
 })
 
 
